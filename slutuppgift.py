@@ -1,1 +1,6 @@
-# Slutuppgift i Systemutveckling i Python
+print ('[1] STARTA ÖVERVAKNING')
+print ('[2] LISTA AKTIV ÖVERVAKNING')
+print ('[3] SKAPA LARM')
+print ('[4] VISA LARM')
+print ('[5] STARTA ÖVERVAKNINGSLÄGE')
+print ('[6] TA BORT ALARM')
