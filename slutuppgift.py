@@ -1,9 +1,11 @@
 import psutil
 import time
 
-print ('[1] STARTA ÖVERVAKNING')
-print ('[2] LISTA AKTIV ÖVERVAKNING')
-print ('[3] SKAPA LARM')
-print ('[4] VISA LARM')
-print ('[5] STARTA ÖVERVAKNINGSLÄGE')
-print ('[6] TA BORT ALARM')
+print("------------ MENY ------------")
+print ("[1] Starta övervakning")
+print ("[2] Lista aktiv övervakning")
+print ("[3] Skapa larm")
+print ("[4] Visa larm")
+print ("[5] Starta övervakningsläge")
+print ("[6] Ta bort alarm")
+print("------------------------------")
