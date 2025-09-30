@@ -1,3 +1,6 @@
+import psutil
+import time
+
 print ('[1] STARTA ÖVERVAKNING')
 print ('[2] LISTA AKTIV ÖVERVAKNING')
 print ('[3] SKAPA LARM')
