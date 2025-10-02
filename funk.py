@@ -58,22 +58,41 @@ def get_valid_percentage(prompt): #lägger till prompt för att kunna skriva ut 
      while True:
           percentage = input(prompt)
           if percentage.isdigit() and int(percentage) >= 0 and int(percentage) <=100:
-               return int(percentage)
+               return int(percentage) 
           else:
                print("\nOgiltigt val! Det måste vara en procentsats mellan 0-100\n")
 
 def set_alarm(alarm_type, percentage):
-     alarms_dict[alarm_type] = percentage
+     alarms_dict[alarm_type].append(percentage)
      print((f"✓ Larm för {alarm_type} satt till {percentage}%"))
 
+def show_alarms():
+    if not any(alarms_dict.values()):  # om alla listor är tomma
+        print("Inga larm är satta ännu.")
+    else:
+        print("\n📋 Aktuella larm:")
+        for alarm_type in sorted(alarms_dict.keys()):  # sortera efter typ
+            percentages = alarms_dict[alarm_type]
+            if percentages:  # om listan inte är tom
+                for p in percentages:
+                    print(f"- {alarm_type.upper()}: {p}%")
+
 def check_alarms(cpu, memory, disk):
-    if alarms_dict["cpu"] is not None and cpu >= alarms_dict["cpu"]:
-          alarms_dict.append(f"⚠️ CPU-LARM: {cpu}% (gräns: {alarms_dict["cpu"]}%)")
+    """
+    Kollar aktuella värden mot larmnivåer i alarms_dict.
+    Skriver ut varningsmeddelande för varje larm som överskrids.
+    """
+    if "cpu" in alarms_dict:
+        for level in alarms_dict["cpu"]:
+            if cpu >= level:
+                print(f"⚠️  CPU-LARM! Aktuell användning: {cpu}% (gräns: {level}%)")
 
-    if alarms_dict["memory"] is not None and memory >= alarms_dict["memory"]:
-          alarms_dict.append(f"⚠️ MINNE-LARM: {memory}% (gräns: {alarms_dict["memory"]}%)")
+    if "memory" in alarms_dict:
+        for level in alarms_dict["memory"]:
+            if memory >= level:
+                print(f"⚠️  MINNE-LARM! Aktuell användning: {memory}% (gräns: {level}%)")
 
-    if alarms_dict["disk"] is not None and disk >= alarms_dict["disk"]:
-          alarms_dict.append(f"⚠️ DISK-LARM: {disk}% (gräns: {alarms_dict["disk"]}%)")
-
-    return alarms_dict
+    if "disk" in alarms_dict:
+        for level in alarms_dict["disk"]:
+            if disk >= level:
+                print(f"⚠️  DISK-LARM! Aktuell användning: {disk}% (gräns: {level}%)")

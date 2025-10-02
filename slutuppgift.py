@@ -13,8 +13,9 @@ def main():
     from funk import alarm_choice
     from funk import get_valid_percentage
     from funk import set_alarm
-    from funk import check_alarms
     from funk import alarms_dict
+    from funk import show_alarms
+    from funk import check_alarms
         
     while menu_is_running:
         print_main_menu()
@@ -23,11 +24,13 @@ def main():
         if menu_input == 1: #Starta övervakning
             print("\n• Övervakningen har startat •\n")
             monitoring_started = True
+            input("Tryck Enter för att bekräfta")
 
         elif menu_input == 2: #Lista övervakning
             cpu, memory, disk = monitoring()
             if monitoring_started == False:
                 print("\n• Ingen övervakning startad •\n")
+                input("Tryck Enter för att bekräfta")
                 continue
             print("\n-----------------ÖVERVAKNING-----------------")
             print(f"| CPU-användning: {cpu}%                     |"
@@ -38,22 +41,23 @@ def main():
             
 
         elif menu_input == 3: #Skapa larm
+            alarm_menu_is_running = True
             while alarm_menu_is_running:
                 print_alarm_meny()
                 alarm_input = alarm_choice()
 
                 if alarm_input == 1:
-                    print("\n---Du valde att skapa ett larm för CPU-användning---\n")
+                    print("\n---Skapa ett larm för CPU-användning---\n")
                     cpu_percentage = get_valid_percentage("Ange vilken procentsats du vill bli larmad om: ")
                     set_alarm("cpu", cpu_percentage)
 
                 elif alarm_input == 2:
-                    print("\n---Du valde att skapa ett larm för Minnesanvändning---\n")
+                    print("\n---Skapa ett larm för Minnesanvändning---\n")
                     memory_percentage = get_valid_percentage("Ange vilken procentsats du vill bli larmad om: ")
                     set_alarm("memory", memory_percentage)
 
                 elif alarm_input == 3:
-                    print("\n---Du valde att skapa ett larm för Diskanvändning---\n")
+                    print("\n---Skapa ett larm för Diskanvändning---\n")
                     disk_percentage = get_valid_percentage("Ange vilken procentsats du vill bli larmad om: ")
                     set_alarm("disk", disk_percentage)
 
@@ -61,13 +65,28 @@ def main():
                     alarm_menu_is_running = False
 
         elif menu_input == 4: #Visa larm
-            print("\n=====AKTIVA LARM=====\n")
-            
-            
-            input("\nTryck Enter för att bekräfta\n")
+            show_alarms()
+            input("\nTryck Enter för att bekräfta")
 
         elif menu_input == 5: #Skapa övervakningsläge
-            pass
+            if not monitoring_started:
+                print("\n• Ingen övervakning startad •\n")
+                input("Tryck Enter för att bekräfta")
+                continue
+
+            cpu, memory, disk = monitoring()
+    
+            print("\n-----------------ÖVERVAKNING-----------------")
+            print(f"| CPU-användning: {cpu}%                     |"
+            f" \n| Minnesanvändning: {memory.percent}% | {memory.used // (1024**3)} GB av {memory.total // (1024**3)} GB   |"
+            f" \n| Diskanvändning: {disk.percent}%    | {disk.used // (1024**3)} GB av {disk.total //(1024**3)} GB |")
+            print("---------------------------------------------")
+    
+            # Här kollar vi larm och skriver ut varningar direkt
+            check_alarms(cpu, memory.percent, disk.percent)
+            time.sleep(2)
+    
+            input("\nTryck Enter för att fortsätta ")
             
         elif menu_input == 6:
             print("Programmet avslutas")
