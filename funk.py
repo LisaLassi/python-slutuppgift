@@ -1,5 +1,6 @@
 import psutil
 import time
+import os
 
 alarms_dict ={
         "cpu" : [],
@@ -96,3 +97,8 @@ def check_alarms(cpu, memory, disk):
         for level in alarms_dict["disk"]:
             if disk >= level:
                 print(f"⚠️  DISK-LARM! Aktuell användning: {disk}% (gräns: {level}%)")
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear') 
+    #os.name == nt --> betyder windows --> kör cls
+    #annars --> kör clear

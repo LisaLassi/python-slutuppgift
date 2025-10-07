@@ -1,21 +1,16 @@
 import psutil
+import os
 import time
+import msvcrt #för att kunna kolla om användaren tryckt enter
 
 def main():
     menu_is_running = True
     monitoring_started = False
     alarm_menu_is_running = True
 
-    from funk import print_main_menu
-    from funk import menu_choice
-    from funk import monitoring
-    from funk import print_alarm_meny
-    from funk import alarm_choice
-    from funk import get_valid_percentage
-    from funk import set_alarm
+    from funk import print_main_menu, menu_choice, monitoring, print_alarm_meny, alarm_choice
+    from funk import get_valid_percentage, set_alarm, show_alarms, check_alarms, clear_screen
     from funk import alarms_dict
-    from funk import show_alarms
-    from funk import check_alarms
         
     while menu_is_running:
         print_main_menu()
@@ -74,19 +69,26 @@ def main():
                 input("Tryck Enter för att bekräfta")
                 continue
 
-            cpu, memory, disk = monitoring()
-    
-            print("\n-----------------ÖVERVAKNING-----------------")
-            print(f"| CPU-användning: {cpu}%                     |"
-            f" \n| Minnesanvändning: {memory.percent}% | {memory.used // (1024**3)} GB av {memory.total // (1024**3)} GB   |"
-            f" \n| Diskanvändning: {disk.percent}%    | {disk.used // (1024**3)} GB av {disk.total //(1024**3)} GB |")
-            print("---------------------------------------------")
-    
-            # Här kollar vi larm och skriver ut varningar direkt
-            check_alarms(cpu, memory.percent, disk.percent)
-            time.sleep(2)
-    
-            input("\nTryck Enter för att fortsätta ")
+            while True:
+                    cpu, memory, disk = monitoring()
+                    clear_screen() #Rensar skärmen innan ny uppdatering
+            
+                    print("\n-----------------ÖVERVAKNING-----------------")
+                    print(f"| CPU-användning: {cpu}%                     |"
+                    f" \n| Minnesanvändning: {memory.percent}% | {memory.used // (1024**3)} GB av {memory.total // (1024**3)} GB   |"
+                    f" \n| Diskanvändning: {disk.percent}%    | {disk.used // (1024**3)} GB av {disk.total //(1024**3)} GB |")
+                    print("---------------------------------------------")
+
+                    # Här kollar vi larm och skriver ut varningar direkt
+                    check_alarms(cpu, memory.percent, disk.percent)
+                    print("Tryck Enter för att avsluta övervakning")
+                    time.sleep(2)
+
+                    if msvcrt.kbhit():
+                        key = msvcrt.getch()
+                        if key == b'\r':
+                            print("\nÖvervakning avslutad")
+                            break
             
         elif menu_input == 6:
             print("Programmet avslutas")
