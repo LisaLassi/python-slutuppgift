@@ -1,5 +1,4 @@
 import psutil
-import time
 import os
 
 alarms_dict ={
@@ -65,7 +64,7 @@ def get_valid_percentage(prompt): #lägger till prompt för att kunna skriva ut 
 
 def set_alarm(alarm_type, percentage):
      alarms_dict[alarm_type].append(percentage)
-     print((f"✓ Larm för {alarm_type} satt till {percentage}%"))
+     print(f"✓ Larm för {alarm_type} satt till {percentage}%")
 
 def show_alarms():
     if not any(alarms_dict.values()):  # om alla listor är tomma
