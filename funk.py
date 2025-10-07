@@ -33,9 +33,9 @@ def menu_choice():
             if 1 <= menu_number <= 6:
                 return menu_number
             else:
-                print("Du måste välja en siffra mellan 1-6.")
+                print("\nDu måste välja en siffra mellan 1-6.")
         except ValueError:
-            print("Ogiltigt val! Det måste vara en siffra.")
+            print("\nOgiltigt val! Det måste vara en siffra.")
 
 def alarm_choice():
     while True:
@@ -45,9 +45,9 @@ def alarm_choice():
             if 1 <= alarm_number <= 4:
                 return alarm_number
             else:
-                    print("Du måste välja en siffra mellan 1-4.")
+                    print("\nDu måste välja en siffra mellan 1-4.")
         except ValueError:
-                print("Ogiltigt val! Det måste vara en siffra.")
+                print("\nOgiltigt val! Det måste vara en siffra.")
     
 def monitoring():
     cpu = psutil.cpu_percent(interval=1)

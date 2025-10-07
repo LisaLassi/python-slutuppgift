@@ -29,7 +29,7 @@ def main():
                 input("Tryck Enter för att bekräfta")
                 continue
             print("\n-----------------ÖVERVAKNING-----------------")
-            print(f"| CPU-användning: {cpu}%                     |"
+            print(f"| CPU-användning: {cpu}%                      |"
                 f" \n| Minnesanvändning: {memory.percent}% | {memory.used // (1024**6)} GB av {memory.total // (1024**3)} GB   |"
                 f" \n| Diskanvändning: {disk.percent}%    | {disk.used // (1024**3)} GB av {disk.total //(1024**3)} GB |")
             print("---------------------------------------------")
@@ -92,7 +92,7 @@ def main():
                             break
             
         elif menu_input == 6:
-            print("Programmet avslutas")
+            print("\nProgrammet avslutas")
             menu_is_running = False
 
 if __name__ == "__main__":
