@@ -30,7 +30,7 @@ def main():
                 continue
             print("\n-----------------ÖVERVAKNING-----------------")
             print(f"| CPU-användning: {cpu}%                      |"
-                f" \n| Minnesanvändning: {memory.percent}% | {memory.used // (1024**6)} GB av {memory.total // (1024**3)} GB   |"
+                f" \n| Minnesanvändning: {memory.percent}% | {memory.used // (1024**3)} GB av {memory.total // (1024**3)} GB   |"
                 f" \n| Diskanvändning: {disk.percent}%    | {disk.used // (1024**3)} GB av {disk.total //(1024**3)} GB |")
             print("---------------------------------------------")
             input("\n Tryck Enter för att bekräfta ")
