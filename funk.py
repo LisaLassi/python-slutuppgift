@@ -42,7 +42,7 @@ def alarm_choice():
         alarm_input = input("\nGör ett menyval 1-4: ")
         try:
             alarm_number = int(alarm_input)
-            if 1 <= alarm_number <= 6:
+            if 1 <= alarm_number <= 4:
                 return alarm_number
             else:
                     print("Du måste välja en siffra mellan 1-4.")

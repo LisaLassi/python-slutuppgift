@@ -10,7 +10,8 @@ def main():
 
     from funk import print_main_menu, menu_choice, monitoring, print_alarm_meny, alarm_choice
     from funk import get_valid_percentage, set_alarm, show_alarms, check_alarms, clear_screen
-    from funk import alarms_dict
+    #from funk import alarms_dict 
+    #Behöver tydligen inte importera dictionaryn för att den redan används internt i funk
         
     while menu_is_running:
         print_main_menu()
@@ -81,9 +82,9 @@ def main():
 
                     # Här kollar vi larm och skriver ut varningar direkt
                     check_alarms(cpu, memory.percent, disk.percent)
-                    print("Tryck Enter för att avsluta övervakning")
+                    print("\nTryck Enter för att avsluta övervakning")
                     time.sleep(2)
-
+                    
                     if msvcrt.kbhit():
                         key = msvcrt.getch()
                         if key == b'\r':
