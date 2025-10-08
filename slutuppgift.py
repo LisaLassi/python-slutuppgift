@@ -17,23 +17,23 @@ def main():
         menu_input = menu_choice()
 
         if menu_input == 1:
-            print("\n• Övervakningen har startat •\n")
+            print("\n• Monitoring has started.. •\n")
             monitoring_started = True
-            input("Tryck Enter för att fortsätta")
+            input("Press Enter to continue")
 
         elif menu_input == 2:
             cpu, memory, disk = monitor.get_all_stats()
             if monitoring_started == False:
-                print("\n• Ingen övervakning startad •\n")
-                input("Tryck Enter för att fortsätta")
+                print("\n• No monitoring started •\n")
+                input("Press Enter to continue")
                 continue
 
-            print("\n-----------------ÖVERVAKNING-----------------")
-            print(f"| CPU-användning: {cpu}%                      |"
-                f" \n| Minnesanvändning: {memory.percent}% | {memory.used // (1024**3)} GB av {memory.total // (1024**3)} GB   |"
-                f" \n| Diskanvändning: {disk.percent}%    | {disk.used // (1024**3)} GB av {disk.total //(1024**3)} GB |")
-            print("---------------------------------------------")
-            input("\n Tryck Enter för att fortsätta ")
+            print("\n----------------MONITORING---------------")
+            print(f"| CPU-usage: {cpu}%                       |"
+                f" \n| Memory usage: {memory.percent}% | {memory.used // (1024**3)} GB av {memory.total // (1024**3)} GB   |"
+                f" \n| Disk usage: {disk.percent}%    | {disk.used // (1024**3)} GB av {disk.total //(1024**3)} GB |")
+            print("-----------------------------------------")
+            input("\n Press Enter to continue \n")
             
 
         elif menu_input == 3:
@@ -43,18 +43,18 @@ def main():
                 alarm_input = alarm_choice()
 
                 if alarm_input == 1:
-                    print("\n---Skapa ett larm för CPU-användning---\n")
-                    cpu_percentage = get_valid_percentage("Ange vilken procentsats du vill bli larmad om: ")
+                    print("\n---Create an alarm for CPU-usage---\n")
+                    cpu_percentage = get_valid_percentage("Enter the percentage you want to be alerted about: ")
                     monitor.add_alarm("cpu", cpu_percentage)
 
                 elif alarm_input == 2:
-                    print("\n---Skapa ett larm för Minnesanvändning---\n")
-                    memory_percentage = get_valid_percentage("Ange vilken procentsats du vill bli larmad om: ")
+                    print("\n---Create an alarm for Memory usage---\n")
+                    memory_percentage = get_valid_percentage("Enter the percentage you want to be alerted about: ")
                     monitor.add_alarm("memory", memory_percentage)
 
                 elif alarm_input == 3:
-                    print("\n---Skapa ett larm för Diskanvändning---\n")
-                    disk_percentage = get_valid_percentage("Ange vilken procentsats du vill bli larmad om: ")
+                    print("\n---Create an alarm for Disk usage---\n")
+                    disk_percentage = get_valid_percentage("Enter the percentage you want to be alerted about: ")
                     monitor.add_alarm("disk", disk_percentage)
 
                 elif alarm_input == 4:
@@ -62,37 +62,37 @@ def main():
 
         elif menu_input == 4:
             monitor.show_alarms()
-            input("\nTryck Enter för att fortsätta")
+            input("\nPress Enter to continue")
 
         elif menu_input == 5:
             if not monitoring_started:
-                print("\n• Ingen övervakning startad •\n")
-                input("Tryck Enter för att bekräfta")
+                print("\n• No monitoring started •\n")
+                input("Press Enter to continue")
                 continue
 
             while True:
                     cpu, memory, disk = monitor.get_all_stats()
                     monitor.clear_screen()
             
-                    print("\n-----------------ÖVERVAKNING-----------------")
-                    print(f"| CPU-användning: {cpu}%                     |"
-                    f" \n| Minnesanvändning: {memory.percent}% | {memory.used // (1024**3)} GB av {memory.total // (1024**3)} GB   |"
-                    f" \n| Diskanvändning: {disk.percent}%    | {disk.used // (1024**3)} GB av {disk.total //(1024**3)} GB |")
-                    print("---------------------------------------------")
+                    print("\n---------------MONITORING----------------")
+                    print(f"| CPU-usage: {cpu}%                       |"
+                    f" \n| Memory usage: {memory.percent}% | {memory.used // (1024**3)} GB of {memory.total // (1024**3)} GB   |"
+                    f" \n| Disk usage: {disk.percent}%    | {disk.used // (1024**3)} GB of {disk.total //(1024**3)} GB |")
+                    print("-----------------------------------------")
 
                     monitor.check_alarms(cpu, memory.percent, disk.percent)
 
-                    print("\nTryck Enter för att avsluta övervakning")
+                    print("\nPress Enter to end monitoring")
                     time.sleep(2)
                     
                     if msvcrt.kbhit():
                         key = msvcrt.getch()
                         if key == b'\r':
-                            print("\nÖvervakning avslutad")
+                            print("\nMonitoring ended")
                             break
             
         elif menu_input == 6:
-            print("\nProgrammet avslutas")
+            print("\nExiting program..")
             menu_is_running = False
 
 if __name__ == "__main__":
