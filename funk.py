@@ -27,7 +27,7 @@ class SystemMonitor: #Klass för att övervaka systemresurser, hanterar systemda
                 self.alarms[alarm_type].append(percantage)
                 print(f"✓ Alarm for {alarm_type} set to {percantage}%")
                 return True
-            return False
+            #return False #varför?
         
         def show_alarms(self): # Visar alla aktiva larm
             if not any (self.alarms.values()):
@@ -45,7 +45,7 @@ class SystemMonitor: #Klass för att övervaka systemresurser, hanterar systemda
 
             for level in self.alarms["cpu"]:
                 if cpu >= level:
-                    print(f"CPU-ALARM! Current usage: {cpu}%, (Limit: {level})")
+                    print(f"CPU-ALARM!    Current usage: {cpu}%, (Limit: {level})")
                     triggered.append(("cpu", level, cpu))
 
             for level in self.alarms["memory"]:
@@ -55,7 +55,7 @@ class SystemMonitor: #Klass för att övervaka systemresurser, hanterar systemda
 
             for level in self.alarms["disk"]:
                 if disk >= level:
-                    print(f"DISK-ALARM! Current usage: {disk}%, (Limit: {level})")
+                    print(f"DISK-ALARM!   Current usage: {disk}%, (Limit: {level})")
                     triggered.append(("disk", level, disk))
             return triggered
         
