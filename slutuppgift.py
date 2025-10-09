@@ -73,7 +73,7 @@ def main():
             while True:
                     cpu, memory, disk = monitor.get_all_stats()
                     monitor.clear_screen()
-            
+                    
                     print("\n---------------MONITORING----------------")
                     print(f"| CPU-usage: {cpu}%                       |"
                     f" \n| Memory usage: {memory.percent}% | {memory.used // (1024**3)} GB of {memory.total // (1024**3)} GB   |"

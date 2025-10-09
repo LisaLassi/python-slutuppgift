@@ -40,18 +40,18 @@ class SystemMonitor: #Klass för att övervaka systemresurser, hanterar systemda
                             print(f"- {alarm_type.upper()}: {p}%")
 
         def check_alarms(self, cpu, memory, disk): # Kontrollerar om några larm ska triggas
-            
+            print("\n • Monitoring active • \n")
             for level in self.alarms["cpu"]: # Går igenom alla cpu larmgränser
                 if cpu >= level: # Kollar om nuvarande cpu användning är = eller över larmgränsen
-                    print(f"CPU-ALARM!    Current usage: {cpu}%, (Limit: {level})") 
+                    print(f"*** WARNING! CPU-ALARM ACTIVATED! cpu usage exceeds {level}%, current at {cpu}%) ***") 
 
             for level in self.alarms["memory"]:
                 if memory >= level:
-                    print(f"MEMORY-ALARM! Current usage: {memory}%, (Limit: {level})")
+                    print(f"*** WARNING! MEMORY-ALARM ACTIVATED! memory usage exceeds {level}%, current at {memory}% ***")
 
             for level in self.alarms["disk"]:
                 if disk >= level:
-                    print(f"DISK-ALARM!   Current usage: {disk}%, (Limit: {level})")
+                    print(f"*** WARNING! DISK-ALARM ACTIVATED! disk usage exceeds {level}%, current at {disk}% ***")
         
         def clear_screen(self): # Rensar terminalen
             os.system('cls' if os.name == 'nt' else 'clear')
