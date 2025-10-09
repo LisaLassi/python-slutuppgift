@@ -33,7 +33,7 @@ def main():
                 f" \n| Memory usage: {memory.percent}% | {memory.used // (1024**3)} GB av {memory.total // (1024**3)} GB   |"
                 f" \n| Disk usage: {disk.percent}%    | {disk.used // (1024**3)} GB av {disk.total //(1024**3)} GB |")
             print("-----------------------------------------")
-            input("\n Press Enter to continue \n")
+            input("\n Press Enter to continue")
             
 
         elif menu_input == 3:

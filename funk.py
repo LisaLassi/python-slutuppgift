@@ -12,7 +12,7 @@ class SystemMonitor: #Klass för att övervaka systemresurser, hanterar systemda
 
         def get_cpu(self): # Hämtar cpu-användning
             return psutil.cpu_percent(interval=1)
-        
+
         def get_memory(self): # Hämtar minnesanvändning
             return psutil.virtual_memory()
         
@@ -23,41 +23,35 @@ class SystemMonitor: #Klass för att övervaka systemresurser, hanterar systemda
             return self.get_cpu(), self.get_memory(), self.get_disk()
         
         def add_alarm(self, alarm_type, percantage): # Lägger till ett larm
-            if alarm_type in self.alarms:
-                self.alarms[alarm_type].append(percantage)
+            if alarm_type in self.alarms: # Kollar om nyckeln finns i dictionaryn
+                self.alarms[alarm_type].append(percantage) # Lägger till den nya procentsatssen i slutet på listan
                 print(f"✓ Alarm for {alarm_type} set to {percantage}%")
-                return True
-            #return False #varför?
+                return True # Gör egentligen ingenting, då jag inte använder mig av något vilkor om detta är sant eller falskt. Men bra att ha för att veta att något lyckades och la till något.
         
         def show_alarms(self): # Visar alla aktiva larm
-            if not any (self.alarms.values()):
+            if not any (self.alarms.values()): # Om ingen lista har något innehåll (dvs larm)
                 print("No alarms set yet.")
             else:
                 print("\nCURRENT ALARMS: ")
-                for alarm_type in sorted(self.alarms.keys()):
-                    percentages = self.alarms[alarm_type]
-                    if percentages:
-                        for p in percentages:
+                for alarm_type in sorted(self.alarms.keys()): # Går igenom alla nycklar i self.alarm (cpu, memory, disk)
+                    percentages = self.alarms[alarm_type] # Hämtar listan med procentsatser
+                    if percentages: # Kollar om listan inte är tom
+                        for p in percentages: # Loopar igenom varje procentsats i listan
                             print(f"- {alarm_type.upper()}: {p}%")
 
         def check_alarms(self, cpu, memory, disk): # Kontrollerar om några larm ska triggas
-            triggered = []
-
-            for level in self.alarms["cpu"]:
-                if cpu >= level:
-                    print(f"CPU-ALARM!    Current usage: {cpu}%, (Limit: {level})")
-                    triggered.append(("cpu", level, cpu))
+            
+            for level in self.alarms["cpu"]: # Går igenom alla cpu larmgränser
+                if cpu >= level: # Kollar om nuvarande cpu användning är = eller över larmgränsen
+                    print(f"CPU-ALARM!    Current usage: {cpu}%, (Limit: {level})") 
 
             for level in self.alarms["memory"]:
                 if memory >= level:
                     print(f"MEMORY-ALARM! Current usage: {memory}%, (Limit: {level})")
-                    triggered.append(("memory", level, memory))
 
             for level in self.alarms["disk"]:
                 if disk >= level:
                     print(f"DISK-ALARM!   Current usage: {disk}%, (Limit: {level})")
-                    triggered.append(("disk", level, disk))
-            return triggered
         
         def clear_screen(self): # Rensar terminalen
             os.system('cls' if os.name == 'nt' else 'clear')
