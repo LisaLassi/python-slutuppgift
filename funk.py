@@ -23,7 +23,6 @@ class SystemMonitor: #Klass för att övervaka systemresurser, hanterar systemda
             return self.get_cpu(), self.get_memory(), self.get_disk()
         
         def add_alarm(self, alarm_type, percantage): # Lägger till ett larm
-            if alarm_type in self.alarms: # Kollar om nyckeln finns i dictionaryn
                 self.alarms[alarm_type].append(percantage) # Lägger till den nya procentsatssen i slutet på listan
                 print(f"✓ Alarm for {alarm_type} set to {percantage}%")
                 return True # Gör egentligen ingenting, då jag inte använder mig av något vilkor om detta är sant eller falskt. Men bra att ha för att veta att något lyckades och la till något.
