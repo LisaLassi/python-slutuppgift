@@ -1,7 +1,7 @@
 import time
 import msvcrt
 
-from classes import SystemMonitor
+from monitoring_class import SystemMonitor
 from functions import print_main_menu, main_menu_choice, print_alarm_meny, alarm_menu_choice, get_valid_percentage
 
 def main():
