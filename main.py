@@ -1,8 +1,8 @@
 import time
 import msvcrt
 
-from functions import SystemMonitor
-from functions import print_main_menu, menu_choice, print_alarm_meny, alarm_choice, get_valid_percentage
+from classes import SystemMonitor
+from functions import print_main_menu, main_menu_choice, print_alarm_meny, alarm_menu_choice, get_valid_percentage
 
 def main():
 
@@ -14,7 +14,7 @@ def main():
 
     while menu_is_running:
         print_main_menu()
-        menu_input = menu_choice()
+        menu_input = main_menu_choice()
 
         if menu_input == 1:
             print("\n• Monitoring has started.. •\n")
@@ -40,7 +40,7 @@ def main():
             alarm_menu_is_running = True
             while alarm_menu_is_running:
                 print_alarm_meny()
-                alarm_input = alarm_choice()
+                alarm_input = alarm_menu_choice()
 
                 if alarm_input == 1:
                     print("\n---Create an alarm for CPU-usage---\n")
