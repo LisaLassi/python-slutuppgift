@@ -1,8 +1,8 @@
 import time
 import msvcrt
 
-from funk import SystemMonitor
-from funk import print_main_menu, menu_choice, print_alarm_meny, alarm_choice, get_valid_percentage
+from functions import SystemMonitor
+from functions import print_main_menu, menu_choice, print_alarm_meny, alarm_choice, get_valid_percentage
 
 def main():
 
