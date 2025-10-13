@@ -33,7 +33,7 @@ class SystemMonitor:
                 print("No alarms set yet.")
             else:
                 print("\nCURRENT ALARMS: ")
-                for alarm_type in sorted(self.alarms.keys()): # Går igenom alla nycklar i self.alarm (cpu, memory, disk)
+                for alarm_type in sorted(self.alarms.keys()): # Går igenom alla nycklar i self.alarm + sorterar för typ(cpu, memory, disk)
                     percentages = self.alarms[alarm_type] # Hämtar listan med procentsatser
                     if percentages: # Kollar om listan inte är tom
                         for p in percentages: # Loopar igenom varje procentsats i listan
