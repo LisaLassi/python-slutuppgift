@@ -13,7 +13,7 @@ def print_main_menu():
     print("---------------------------------------------------")
 
 def print_alarm_meny():
-    print("\n----Configure alarm----\n")
+    print("\n• Configure alarm •\n")
     print("[1] CPU-usage")
     print("[2] Memory usage")
     print("[3] Disk usage")
@@ -41,7 +41,7 @@ def alarm_menu_choice():
                 pass
         print("\nInvalid choice. Must be a number between 1-4. Try again.")
     
-def get_valid_percentage(prompt): #lägger till prompt för att kunna skriva ut ett meddelande till användaren innan input.
+def get_valid_percentage(prompt):
      while True:
           percentage = input(prompt)
           if percentage.isdigit() and int(percentage) >= 0 and int(percentage) <=100:

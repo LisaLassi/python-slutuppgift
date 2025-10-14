@@ -2,10 +2,10 @@ import time
 import msvcrt
 
 from monitoring_class import SystemMonitor
-from functions import print_main_menu, main_menu_choice, print_alarm_meny, alarm_menu_choice, get_valid_percentage
+from functions import print_main_menu, main_menu_choice, print_alarm_meny
+from functions import alarm_menu_choice, get_valid_percentage
 
 def main():
-
     monitor = SystemMonitor()
 
     menu_is_running = True
@@ -15,9 +15,10 @@ def main():
     while menu_is_running:
         print_main_menu()
         menu_input = main_menu_choice()
+        monitor.clear_screen()
 
         if menu_input == 1:
-            print("\n• Monitoring has started.. •\n")
+            print("\n• Monitoring has started •\n")
             monitoring_started = True
             input("Press Enter to continue")
 
@@ -35,25 +36,25 @@ def main():
             print("-----------------------------------------")
             input("\n Press Enter to continue")
             
-
         elif menu_input == 3:
             alarm_menu_is_running = True
             while alarm_menu_is_running:
                 print_alarm_meny()
                 alarm_input = alarm_menu_choice()
+                monitor.clear_screen()
 
                 if alarm_input == 1:
-                    print("\n---Create an alarm for CPU-usage---\n")
+                    print("\n• Create an alarm for CPU-usage •\n")
                     cpu_percentage = get_valid_percentage("Enter the percentage you want to be alerted about: ")
                     monitor.add_alarm("cpu", cpu_percentage)
 
                 elif alarm_input == 2:
-                    print("\n---Create an alarm for Memory usage---\n")
+                    print("\n• Create an alarm for Memory usage •\n")
                     memory_percentage = get_valid_percentage("Enter the percentage you want to be alerted about: ")
                     monitor.add_alarm("memory", memory_percentage)
 
                 elif alarm_input == 3:
-                    print("\n---Create an alarm for Disk usage---\n")
+                    print("\n• Create an alarm for Disk usage •\n")
                     disk_percentage = get_valid_percentage("Enter the percentage you want to be alerted about: ")
                     monitor.add_alarm("disk", disk_percentage)
 
@@ -71,6 +72,7 @@ def main():
                 continue
 
             while True:
+                    stop_display = False
                     cpu, memory, disk = monitor.get_all_stats()
                     monitor.clear_screen()
                     
@@ -82,13 +84,13 @@ def main():
 
                     monitor.check_alarms(cpu, memory.percent, disk.percent)
 
-                    print("\nPress Enter to end monitoring")
+                    print("\nPress Enter to exit")
                     time.sleep(2)
-                    
+
                     if msvcrt.kbhit():
                         key = msvcrt.getch()
                         if key == b'\r':
-                            print("\nMonitoring ended")
+                            print("\n• Monitoring ended •")
                             break
             
         elif menu_input == 6:

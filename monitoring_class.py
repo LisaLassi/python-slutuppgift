@@ -11,28 +11,28 @@ class SystemMonitor:
                 "disk" : []
             }
 
-        def get_cpu(self): # Hämtar cpu-användning
+        def get_cpu(self):
             return psutil.cpu_percent(interval=1)
 
-        def get_memory(self): # Hämtar minnesanvändning
+        def get_memory(self):
             return psutil.virtual_memory()
         
-        def get_disk(self): # Hämtar diskanvändning
+        def get_disk(self):
             return psutil.disk_usage('/')
         
-        def get_all_stats(self): # Hämtar all systemdata på en gång
+        def get_all_stats(self):
             return self.get_cpu(), self.get_memory(), self.get_disk()
         
-        def add_alarm(self, alarm_type, percantage): # Lägger till ett larm
-                self.alarms[alarm_type].append(percantage) # Lägger till den nya procentsatssen i slutet på listan
-                print(f"✓ Alarm for {alarm_type} set to {percantage}%")
+        def add_alarm(self, alarm_type, percantage):
+                self.alarms[alarm_type].append(percantage)
+                print(f"\n--- ✓ Alarm for {alarm_type} set to {percantage}% ---")
                 return True # Gör egentligen ingenting, då jag inte använder mig av något vilkor om detta är sant eller falskt. Men bra att ha för att veta att något lyckades och la till något.
         
-        def show_alarms(self): # Visar alla aktiva larm
-            if not any (self.alarms.values()): # Om ingen lista har något innehåll (dvs larm)
+        def show_alarms(self):
+            if not any (self.alarms.values()):
                 print("No alarms set yet.")
             else:
-                print("\nCURRENT ALARMS: ")
+                print("\n• CURRENT ALARMS •\n")
                 for alarm_type in sorted(self.alarms.keys()): # Går igenom alla nycklar i self.alarm + sorterar för typ(cpu, memory, disk)
                     percentages = self.alarms[alarm_type] # Hämtar listan med procentsatser
                     if percentages: # Kollar om listan inte är tom
@@ -53,5 +53,5 @@ class SystemMonitor:
                 if disk >= level:
                     print(f"*** WARNING! DISK-ALARM ACTIVATED! disk usage exceeds {level}%, current at {disk}% ***")
         
-        def clear_screen(self): # Rensar terminalen
+        def clear_screen(self):
             os.system('cls' if os.name == 'nt' else 'clear')
