@@ -1,6 +1,4 @@
 import time
-import msvcrt
-
 from monitoring_class import SystemMonitor
 from functions import print_main_menu, main_menu_choice, print_alarm_meny
 from functions import alarm_menu_choice, get_valid_percentage, display_stats
@@ -69,7 +67,6 @@ def main():
 
             try: 
                 while True:
-                        stop_display = False
                         cpu, memory, disk = monitor.get_all_stats()
                         monitor.clear_screen()
                     
