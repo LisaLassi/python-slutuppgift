@@ -47,4 +47,4 @@ def get_valid_percentage(prompt):
           if percentage.isdigit() and int(percentage) >= 0 and int(percentage) <=100:
                return int(percentage) 
           else:
-               print("\nInvalid choice. Must be a percentage between 0-100%. Try again.\n")
+               print("\nInvalid choice. Must be a number between 0-100. Try again.\n")
