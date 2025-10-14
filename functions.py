@@ -6,7 +6,7 @@ def print_main_menu():
     print("------------ System monitoring ------------\n")
     print ("[1] Start monitoring")
     print ("[2] List active monitoring")
-    print ("[3] Create alarm")
+    print ("[3] Create alarm for cpu/ memory/ disk")
     print ("[4] Show alarms")
     print ("[5] Start monitoring mode")
     print ("[6] Quit program\n")
@@ -29,6 +29,13 @@ def main_menu_choice():
         except ValueError:
             pass 
         print("\nInvalid choice. Must be a number between 1-6. Try again.")
+
+def display_stats(cpu, memory, disk):
+    print("\n----------------MONITORING---------------")
+    print(f"| CPU-usage: {cpu}%                       |"
+    f" \n| Memory usage: {memory.percent}% | {memory.used // (1024**3)} GB av {memory.total // (1024**3)} GB   |"
+    f" \n| Disk usage: {disk.percent}%    | {disk.used // (1024**3)} GB av {disk.total //(1024**3)} GB |")
+    print("-----------------------------------------")
 
 def alarm_menu_choice():
     while True:

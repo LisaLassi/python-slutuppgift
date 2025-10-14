@@ -3,7 +3,7 @@ import msvcrt
 
 from monitoring_class import SystemMonitor
 from functions import print_main_menu, main_menu_choice, print_alarm_meny
-from functions import alarm_menu_choice, get_valid_percentage
+from functions import alarm_menu_choice, get_valid_percentage, display_stats
 
 def main():
     monitor = SystemMonitor()
@@ -29,11 +29,7 @@ def main():
                 input("Press Enter to continue")
                 continue
 
-            print("\n----------------MONITORING---------------")
-            print(f"| CPU-usage: {cpu}%                       |"
-                f" \n| Memory usage: {memory.percent}% | {memory.used // (1024**3)} GB av {memory.total // (1024**3)} GB   |"
-                f" \n| Disk usage: {disk.percent}%    | {disk.used // (1024**3)} GB av {disk.total //(1024**3)} GB |")
-            print("-----------------------------------------")
+            display_stats(cpu, memory, disk)
             input("\n Press Enter to continue")
             
         elif menu_input == 3:
@@ -71,27 +67,21 @@ def main():
                 input("Press Enter to continue")
                 continue
 
-            while True:
-                    stop_display = False
-                    cpu, memory, disk = monitor.get_all_stats()
-                    monitor.clear_screen()
+            try: 
+                while True:
+                        stop_display = False
+                        cpu, memory, disk = monitor.get_all_stats()
+                        monitor.clear_screen()
                     
-                    print("\n---------------MONITORING----------------")
-                    print(f"| CPU-usage: {cpu}%                       |"
-                    f" \n| Memory usage: {memory.percent}% | {memory.used // (1024**3)} GB of {memory.total // (1024**3)} GB   |"
-                    f" \n| Disk usage: {disk.percent}%    | {disk.used // (1024**3)} GB of {disk.total //(1024**3)} GB |")
-                    print("-----------------------------------------")
-
-                    monitor.check_alarms(cpu, memory.percent, disk.percent)
-
-                    print("\nPress Enter to exit")
-                    time.sleep(2)
-
-                    if msvcrt.kbhit():
-                        key = msvcrt.getch()
-                        if key == b'\r':
-                            print("\n• Monitoring ended •")
-                            break
+                        display_stats(cpu, memory, disk)
+                        monitor.check_alarms(cpu, memory.percent, disk.percent)
+                        
+                        print("\nPress Ctrl + C to exit")
+                        time.sleep(2)
+            
+            except KeyboardInterrupt: # try + except keyborardinterrupt - detta för att programmet inte ska krascha
+                    print("\n\n• Monitoring ended •")
+                    input('Press Enter to continue')
             
         elif menu_input == 6:
             print("\nExiting program..")

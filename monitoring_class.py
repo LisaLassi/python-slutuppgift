@@ -1,5 +1,6 @@
 import psutil
 import os
+# type: ignore
 
 #Klass för att övervaka systemresurser, hanterar systemdata & larm
 class SystemMonitor:
@@ -18,7 +19,10 @@ class SystemMonitor:
             return psutil.virtual_memory()
         
         def get_disk(self):
-            return psutil.disk_usage('/')
+            if os.name == 'nt': #Windows
+                return psutil.disk_usage('C:\\')
+            else: #Linux/ Mac
+                return psutil.disk_usage('/') # Ger "felmeddelande" pga att min dator kör windows.
         
         def get_all_stats(self):
             return self.get_cpu(), self.get_memory(), self.get_disk()
