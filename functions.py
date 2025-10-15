@@ -38,7 +38,7 @@ def main_menu_choice():
             pass 
         print("\nInvalid choice. Must be a number between 1-6. Try again.")
 
-def display_stats(cpu, memory, disk): ## Skapa en funktion för omvandling av mg to gb
+def display_stats(cpu, memory, disk):
 
     used_memory_gb = bytes_to_gb(memory.used)
     total_memory_gb = bytes_to_gb(memory.total)
@@ -61,8 +61,9 @@ def alarm_menu_choice():
             alarm_number = int(alarm_input)
             if 1 <= alarm_number <= 4:
                 return alarm_number
-        except ValueError: #
-            print("\nInvalid choice. Must be a number between 1-4. Try again.")
+        except ValueError:
+            pass
+        print("\nInvalid choice. Must be a number between 1-4. Try again.")
     
 def get_valid_percentage(prompt):
      while True:
