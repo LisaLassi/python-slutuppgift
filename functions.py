@@ -38,12 +38,21 @@ def main_menu_choice():
             pass 
         print("\nInvalid choice. Must be a number between 1-6. Try again.")
 
-def display_stats(cpu, memory, disk):
-    print("\n----------------MONITORING---------------")
-    print(f"| CPU-usage: {cpu}%                       |"
-    f" \n| Memory usage: {memory.percent}% | {memory.used // (1024**3)} GB av {memory.total // (1024**3)} GB   |"
-    f" \n| Disk usage: {disk.percent}%    | {disk.used // (1024**3)} GB av {disk.total //(1024**3)} GB |")
-    print("-----------------------------------------")
+def display_stats(cpu, memory, disk): ## Skapa en funktion för omvandling av mg to gb
+
+    used_memory_gb = bytes_to_gb(memory.used)
+    total_memory_gb = bytes_to_gb(memory.total)
+    used_disk_gb = bytes_to_gb(disk.used)
+    total_disk_gb = bytes_to_gb(disk.total)
+
+    print("\n" + "-" * 23 + "MONITORING" + "-" * 23)
+    print(f"| {'CPU-usage:':<20} {cpu:>5.1f}%{' ' * 26}|"
+    f" \n| {'Memory usage:':<20} {memory.percent:>5.1f}% | {used_memory_gb:>6.2f} GB of {total_memory_gb:>6.2f} GB |"
+    f" \n| {'Disk usage:':<20} {disk.percent:>5.1f}% | {used_disk_gb:>6.2f} GB of {total_disk_gb:>6.2f} GB |")
+    print("-" * 56)
+
+def bytes_to_gb(bytes_value):
+    return bytes_value / (1024**3)
 
 def alarm_menu_choice():
     while True:
