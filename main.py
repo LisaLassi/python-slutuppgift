@@ -1,6 +1,6 @@
 import time
 from monitoring_class import SystemMonitor
-from functions import print_main_menu, main_menu_choice, print_alarm_meny
+from functions import print_main_menu, main_menu_choice, print_alarm_meny, write_log
 from functions import alarm_menu_choice, get_valid_percentage, display_stats
 
 def main():
@@ -10,12 +10,15 @@ def main():
     monitoring_started = False
     alarm_menu_is_running = True
 
+    write_log("Program started") 
+
     while menu_is_running:
         print_main_menu()
         menu_input = main_menu_choice()
         monitor.clear_screen()
 
         if menu_input == 1:
+            write_log("Monitoring started")
             print("\n• Monitoring has started •\n")
             monitoring_started = True
             input("Press Enter to continue")
@@ -27,6 +30,7 @@ def main():
                 input("Press Enter to continue")
                 continue
 
+            write_log("Listed active monitoring")
             display_stats(cpu, memory, disk)
             input("\n Press Enter to continue")
             
@@ -37,7 +41,7 @@ def main():
                 alarm_input = alarm_menu_choice()
                 monitor.clear_screen()
 
-                if alarm_input == 1:
+                if alarm_input == 1: # funktion för utskrift av detta?
                     print("\n• Create an alarm for CPU-usage •\n")
                     cpu_percentage = get_valid_percentage("Enter alarm level (1-100): ")
                     monitor.add_alarm("cpu", cpu_percentage)
@@ -65,6 +69,7 @@ def main():
                 input("Press Enter to continue")
                 continue
 
+            write_log("Started active monitoring")
             try: 
                 while True:
                         cpu, memory, disk = monitor.get_all_stats()
@@ -77,10 +82,12 @@ def main():
                         time.sleep(2)
             
             except KeyboardInterrupt: # try + except keyborardinterrupt - detta för att programmet inte ska krascha
+                    write_log("Active monitoring ended")
                     print("\n\n• Monitoring ended •")
                     input('Press Enter to continue')
             
         elif menu_input == 6:
+            write_log("Program ended")
             print("\nExiting program..")
             menu_is_running = False
 

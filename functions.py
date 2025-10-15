@@ -1,7 +1,15 @@
 import psutil
 import os
+from datetime import datetime
 
-# Vanliga funktioner - hanterar användargränssnitt
+log_file = os.path.join("system_logs", "logs")
+
+def write_log(message):
+    os.makedirs(os.path.dirname(log_file), exist_ok=True)
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(log_file, "a", encoding="utf-8") as f:
+        f.write(f"{timestamp} | {message}\n")
+
 def print_main_menu():
     print("------------ System monitoring ------------\n")
     print ("[1] Start monitoring")
@@ -44,9 +52,8 @@ def alarm_menu_choice():
             alarm_number = int(alarm_input)
             if 1 <= alarm_number <= 4:
                 return alarm_number
-        except ValueError:
-                pass
-        print("\nInvalid choice. Must be a number between 1-4. Try again.")
+        except ValueError: #
+            print("\nInvalid choice. Must be a number between 1-4. Try again.")
     
 def get_valid_percentage(prompt):
      while True:
