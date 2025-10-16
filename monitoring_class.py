@@ -16,7 +16,7 @@ class SystemMonitor:
             self.load_alarms()
 
         def load_alarms(self):
-            """ bla bla Laddar larm från JSON-fil om den finns"""
+            """Loads alarms from JSON file if it exists"""
 
             if os.path.exists(self.alarms_file):
                 try:
@@ -28,7 +28,7 @@ class SystemMonitor:
                     write_log("Error loading alarms, using empty alarm list")
 
         def save_alarms(self):
-            """bla bla Sparar larm till json-fil"""
+            """Saving alarms to json file"""
 
             os.makedirs(os.path.dirname(self.alarms_file), exist_ok=True)
             with open(self.alarms_file, 'w', encoding='utf-8') as f:
