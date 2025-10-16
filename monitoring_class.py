@@ -1,16 +1,39 @@
 import psutil
 import os
+import json
 from functions import write_log
 
 """Class for monitoring system resources, managing system data & alarms."""
 class SystemMonitor:
         
         def __init__(self):
+            self.alarms_file = os.path.join("system_logs", "alarms.json")
             self.alarms = {
                 "cpu" : [],
                 "memory" : [],
                 "disk" : []
             }
+            self.load_alarms()
+
+        def load_alarms(self):
+            """ bla bla Laddar larm från JSON-fil om den finns"""
+
+            if os.path.exists(self.alarms_file):
+                try:
+                    with open(self.alarms_file, 'r', encoding='utf-8') as f:
+                        self.alarms = json.load(f)
+                    write_log(f"Loaded {sum(len(v) for v in self.alarms.values())} alarms from file")
+                
+                except:
+                    write_log("Error loading alarms, using empty alarm list")
+
+        def save_alarms(self):
+            """bla bla Sparar larm till json-fil"""
+
+            os.makedirs(os.path.dirname(self.alarms_file), exist_ok=True)
+            with open(self.alarms_file, 'w', encoding='utf-8') as f:
+                json.dump(self.alarms, f, indent=4)
+        write_log("Alarms saved to file")
 
         def get_cpu(self):
             """Get current CPU usage percentage."""
@@ -37,6 +60,7 @@ class SystemMonitor:
             self.alarms[alarm_type].append(percentage)
             print(f"\n--- ✓ Alarm for {alarm_type} set to {percentage}% ---")
             write_log(f"Alarm created: [{alarm_type}] set to ({percentage}%)")
+            self.save_alarms()
             return True # Gör egentligen ingenting, då jag inte använder mig av något vilkor om detta är sant eller falskt. Men bra att ha för att veta att något lyckades och la till något.
         
         def show_alarms(self):
