@@ -73,7 +73,7 @@ class SystemMonitor:
                 print("\n• CURRENT ALARMS •\n")
                 # Iterate through all alarm types in sorted order
                 for alarm_type in sorted(self.alarms.keys()):
-                    percentages = self.alarms[alarm_type] # Hämtar listan med procentsatser
+                    percentages = self.alarms[alarm_type]
 
                     # Only display if there are alarms for this type
                     if percentages:
