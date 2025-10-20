@@ -16,7 +16,7 @@ class SystemMonitor:
             self.load_alarms()
 
         def load_alarms(self):
-            """Loads alarms from JSON file if it exists"""
+            """Loads alarms from json file if it exists"""
 
             if os.path.exists(self.alarms_file):
                 try:
@@ -33,6 +33,7 @@ class SystemMonitor:
             os.makedirs(os.path.dirname(self.alarms_file), exist_ok=True)
             with open(self.alarms_file, 'w', encoding='utf-8') as f:
                 json.dump(self.alarms, f, indent=4)
+
         write_log("Alarms saved to file")
 
         def get_cpu(self):
@@ -86,7 +87,7 @@ class SystemMonitor:
 
             print("\n • Monitoring active • \n")
             for level in self.alarms["cpu"]: # Går igenom alla cpu larmgränser
-                if cpu >= level: # Kollar om nuvarande cpu användning är = eller över larmgränsen
+                if cpu >= level:
                     print(f"*** WARNING! CPU-ALARM ACTIVATED! cpu usage exceeds {level}%, current at {cpu:.1f}%) ***")
                     write_log(f"CPU alarm triggered: current at {cpu}%, level set at {level}%") 
 

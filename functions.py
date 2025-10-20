@@ -44,6 +44,7 @@ def main_menu_choice():
                 return menu_number
             else:
                 print("\nInvalid choice. Must be a number between 1-6. Try again.")
+
         except ValueError:
             print("\nInvalid choice. Must be a number between 1-6. Try again.")
 
@@ -64,7 +65,6 @@ def display_stats(cpu, memory, disk):
 
 def bytes_to_gb(bytes_value):
     """Convert bytes to gigabytes."""
-
     return bytes_value / (1024**3)
 
 def alarm_menu_choice():
@@ -78,6 +78,7 @@ def alarm_menu_choice():
                 return alarm_number
             else:
                 print("\nInvalid choice. Must be a number between 1-4. Try again.")
+
         except ValueError:
             print("\nInvalid choice. Must be a number between 1-4. Try again.")
     
