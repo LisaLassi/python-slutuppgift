@@ -1,7 +1,8 @@
 import os
 from datetime import datetime
 
-log_file = os.path.join("system_logs", "system_monitor.log")
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+log_file = os.path.join("system_logs", f"system_monitor_{timestamp}.log")
 
 def write_log(message):
     """Write a timestamped message to the log file."""
