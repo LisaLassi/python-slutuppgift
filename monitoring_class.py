@@ -68,6 +68,7 @@ class SystemMonitor:
             """Display all currently configured alarms."""
 
             write_log("Listed alarms")
+            
             if not any (self.alarms.values()):
                 print("No alarms set yet.")
             else:

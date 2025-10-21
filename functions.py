@@ -49,6 +49,21 @@ def main_menu_choice():
         except ValueError:
             print("\nInvalid choice. Must be a number between 1-6. Try again.")
 
+def alarm_menu_choice():
+    """Get a valid alarm menu choice from the user."""
+    
+    while True:
+        alarm_input = input("\nMake a menu choice 1-4: ")
+        try:
+            alarm_number = int(alarm_input)
+            if 1 <= alarm_number <= 4:
+                return alarm_number
+            else:
+                print("\nInvalid choice. Must be a number between 1-4. Try again.")
+
+        except ValueError:
+            print("\nInvalid choice. Must be a number between 1-4. Try again.")
+
 def display_stats(cpu, memory, disk):
     """Display system statistics in a formatted table."""
 
@@ -67,21 +82,6 @@ def display_stats(cpu, memory, disk):
 def bytes_to_gb(bytes_value):
     """Convert bytes to gigabytes."""
     return bytes_value / (1024**3)
-
-def alarm_menu_choice():
-    """Get a valid alarm menu choice from the user."""
-    
-    while True:
-        alarm_input = input("\nMake a menu choice 1-4: ")
-        try:
-            alarm_number = int(alarm_input)
-            if 1 <= alarm_number <= 4:
-                return alarm_number
-            else:
-                print("\nInvalid choice. Must be a number between 1-4. Try again.")
-
-        except ValueError:
-            print("\nInvalid choice. Must be a number between 1-4. Try again.")
     
 def get_valid_percentage(prompt):
      """Get a valid percentage value (0-100) from user input."""
