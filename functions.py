@@ -7,7 +7,7 @@ log_file = os.path.join("system_logs", f"system_monitor_{timestamp}.log")
 def write_log(message):
     """Write a timestamped message to the log file."""
 
-    # Create log directory if it doesn't exist
+    # Creating log directory
     os.makedirs(os.path.dirname(log_file), exist_ok=True)
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     with open(log_file, "a", encoding="utf-8") as f:

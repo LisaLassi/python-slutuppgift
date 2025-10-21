@@ -18,7 +18,7 @@ def main():
         menu_input = main_menu_choice()
         monitor.clear_screen()
 
-         # Option 1: Start monitoring
+         # Option 1: Start monitoring / "Activates" the system
         if menu_input == 1:
             write_log("Monitoring started")
             print("\n• Monitoring has started •\n")
