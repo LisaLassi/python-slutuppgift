@@ -34,7 +34,7 @@ class SystemMonitor:
             with open(self.alarms_file, 'w', encoding='utf-8') as f:
                 json.dump(self.alarms, f, indent=4)
 
-        write_log("Alarms saved to file")
+            write_log("Alarms saved to file")
 
         def get_cpu(self):
             """Get current CPU usage percentage."""
