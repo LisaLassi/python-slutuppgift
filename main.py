@@ -93,15 +93,15 @@ def main():
                         display_stats(cpu, memory, disk)
                         monitor.check_alarms(cpu, memory.percent, disk.percent)
                         
-                        print("\nPress Ctrl + C to exit")
+                        print("\nPress Ctrl+C to exit monitoring")
                         # Update every 2 seconds
                         time.sleep(2)
             
             except KeyboardInterrupt:
                     # Handle Ctrl+C gracefully without crashing
                     write_log("Active monitoring ended")
-                    print("\n\n• Monitoring ended •")
-                    input('Press Enter to continue')
+                    print("\n\n• Monitoring ended succesfully •")
+                    input('\nPress Enter to continue')
             
         # Option 6: Exit program
         elif menu_input == 6:
