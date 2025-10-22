@@ -50,19 +50,19 @@ def main():
                 # Create CPU alarm
                 if alarm_input == 1: 
                     print("\n• Create an alarm for CPU-usage •\n")
-                    cpu_percentage = get_valid_percentage("Enter alarm level (1-100): ")
+                    cpu_percentage = get_valid_percentage("Enter alarm limit (1-100): ")
                     monitor.add_alarm("cpu", cpu_percentage)
 
                 # Create Memory alarm
                 elif alarm_input == 2:
                     print("\n• Create an alarm for Memory usage •\n")
-                    memory_percentage = get_valid_percentage("Enter alarm level (1-100): ")
+                    memory_percentage = get_valid_percentage("Enter alarm limit (1-100): ")
                     monitor.add_alarm("memory", memory_percentage)
 
                 # Create Disk alarm
                 elif alarm_input == 3:
                     print("\n• Create an alarm for Disk usage •\n")
-                    disk_percentage = get_valid_percentage("Enter alarm level (1-100): ")
+                    disk_percentage = get_valid_percentage("Enter alarm limit (1-100): ")
                     monitor.add_alarm("disk", disk_percentage)
 
                  # Return to main menu

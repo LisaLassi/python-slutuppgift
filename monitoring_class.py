@@ -45,11 +45,11 @@ class SystemMonitor:
             return psutil.virtual_memory()
         
         def get_disk(self):
-            """Get current disk usage for the system drive."""
+            """Get current disk usage."""
             if os.name == 'nt': #Windows
                 return psutil.disk_usage('C:\\')
             else: #Linux/ Mac
-                return psutil.disk_usage('/') # Ger "felmeddelande" pga att min dator kör windows.
+                return psutil.disk_usage('/')
         
         def get_all_stats(self):
             """Get all system statistics at once."""
@@ -90,17 +90,17 @@ class SystemMonitor:
             for level in self.alarms["cpu"]: # Går igenom alla cpu larmgränser
                 if cpu >= level:
                     print(f"*** WARNING! CPU-ALARM ACTIVATED! cpu usage exceeds {level}%, current at {cpu:.1f}%) ***")
-                    write_log(f"CPU alarm triggered: current at {cpu}%, level set at {level}%") 
+                    write_log(f"CPU alarm triggered: current at {cpu}%, limit set to {level}%") 
 
             for level in self.alarms["memory"]:
                 if memory >= level:
                     print(f"*** WARNING! MEMORY-ALARM ACTIVATED! memory usage exceeds {level}%, current at {memory}% ***")
-                    write_log(f"MEMORY alarm triggered: current at {memory}%, level set at {level}%")
+                    write_log(f"MEMORY alarm triggered: current at {memory}%, limit set to {level}%")
 
             for level in self.alarms["disk"]:
                 if disk >= level:
                     print(f"*** WARNING! DISK-ALARM ACTIVATED! disk usage exceeds {level}%, current at {disk}% ***")
-                    write_log(f"DISK alarm triggered: current at {disk}%, level set at {level}%")
+                    write_log(f"DISK alarm triggered: current at {disk}%, limit set to {level}%")
         
         def clear_screen(self):
             """Clear the terminal screen (cross-platform)."""
