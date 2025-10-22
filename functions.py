@@ -13,7 +13,7 @@ def write_log(message):
     with open(log_file, "a", encoding="utf-8") as f:
         f.write(f"{timestamp} | {message}\n")
 
-def print_main_menu():
+def print_main_meny():
     """Display the main menu options."""
 
     print("------------ System monitoring ------------\n")
@@ -25,7 +25,7 @@ def print_main_menu():
     print ("[6] Quit program\n")
     print("---------------------------------------------------")
 
-def print_alarm_menu():
+def print_alarm_meny():
     """Display the alarm configuration menu."""
 
     print("\n• Configure alarm •\n")
@@ -34,22 +34,22 @@ def print_alarm_menu():
     print("[3] Disk usage")
     print("[4] Back to main menu")
 
-def main_menu_choice():
+def main_meny_choice():
     """Get a valid main menu choice from the user."""
 
     while True:
-        menu_input = input("\nMake a menu choice 1-6: ")
+        meny_input = input("\nMake a menu choice 1-6: ")
         try:
-            menu_number = int(menu_input)
-            if 1 <= menu_number <= 6:
-                return menu_number
+            meny_number = int(meny_input)
+            if 1 <= meny_number <= 6:
+                return meny_number
             else:
                 print("\nInvalid choice. Must be a number between 1-6. Try again.")
 
         except ValueError:
             print("\nInvalid choice. Must be a number between 1-6. Try again.")
 
-def alarm_menu_choice():
+def alarm_meny_choice():
     """Get a valid alarm menu choice from the user."""
     
     while True:
