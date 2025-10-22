@@ -1,32 +1,33 @@
 import time
 from monitoring_class import SystemMonitor
-from functions import print_main_menu, main_menu_choice, print_alarm_menu, write_log
-from functions import alarm_menu_choice, get_valid_percentage, display_stats
+from functions import print_main_meny, main_meny_choice, print_alarm_meny, write_log
+from functions import alarm_meny_choice, get_valid_percentage, display_stats
 
-"""Main program loop for system monitoring application."""
 def main():
-     # Initialize the system monitor
+    """Main program loop for system monitoring application."""
+
+     # Creating an instance of SystemMonitor class
     monitor = SystemMonitor()
 
-    menu_is_running = True
-    monitoring_started = False
+    meny_is_running = True 
+    monitoring_started = False 
 
     write_log("Program started") 
 
-    while menu_is_running:
-        print_main_menu()
-        menu_input = main_menu_choice()
+    while meny_is_running:
+        print_main_meny()
+        meny_input = main_meny_choice()
         monitor.clear_screen()
 
          # Option 1: Start monitoring / "Activates" the system
-        if menu_input == 1:
+        if meny_input == 1: 
             write_log("Monitoring started")
             print("\n• Monitoring has started •\n")
             monitoring_started = True
             input("Press Enter to continue")
 
         # Option 2: List current stats
-        elif menu_input == 2:
+        elif meny_input == 2:
             cpu, memory, disk = monitor.get_all_stats()
 
              # Check if monitoring has been started
@@ -40,11 +41,11 @@ def main():
             input("\nPress Enter to continue")
 
          # Option 3: Configure alarms
-        elif menu_input == 3:
+        elif meny_input == 3:
             alarm_menu_is_running = True
             while alarm_menu_is_running:
-                print_alarm_menu()
-                alarm_input = alarm_menu_choice()
+                print_alarm_meny()
+                alarm_input = alarm_meny_choice()
                 monitor.clear_screen()
 
                 # Create CPU alarm
@@ -70,12 +71,12 @@ def main():
                     alarm_menu_is_running = False
 
         # Option 4: Show all configured alarms
-        elif menu_input == 4:
+        elif meny_input == 4:
             monitor.show_alarms()
             input("\nPress Enter to continue")
 
         # Option 5: Start active monitoring mode
-        elif menu_input == 5:
+        elif meny_input == 5:
              # Check if monitoring has been started
             if not monitoring_started:
                 print("\n• No monitoring started •\n")
@@ -104,10 +105,10 @@ def main():
                     input('\nPress Enter to continue')
             
         # Option 6: Exit program
-        elif menu_input == 6:
+        elif meny_input == 6:
             write_log("Program ended")
             print("\nExiting program..")
-            menu_is_running = False
+            meny_is_running = False
 
 if __name__ == "__main__":
     main()
