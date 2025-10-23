@@ -1,36 +1,35 @@
 import time
 from monitoring_class import SystemMonitor
-from functions import print_main_meny, main_meny_choice, print_alarm_meny, write_log
-from functions import alarm_meny_choice, get_valid_percentage, display_stats
+from functions import print_main_menu, main_menu_choice, print_alarm_menu, write_log
+from functions import alarm_menu_choice, get_valid_percentage, display_stats
 
 def main():
     """Main program loop for system monitoring application."""
 
-     # Creating an instance of SystemMonitor class
-    monitor = SystemMonitor()
+    monitor = SystemMonitor() # Creating an instance of SystemMonitor class
 
-    meny_is_running = True 
+    menu_is_running = True 
     monitoring_started = False 
 
     write_log("Program started") 
 
-    while meny_is_running:
-        print_main_meny()
-        meny_input = main_meny_choice()
+    while menu_is_running:
+        print_main_menu()
+        menu_input = main_menu_choice()
         monitor.clear_screen()
 
-         # Option 1: Start monitoring / "Activates" the system
-        if meny_input == 1: 
+        # Option 1: Start monitoring / "Activates" the system
+        if menu_input == 1: 
             write_log("Monitoring started")
             print("\n• Monitoring has started •\n")
             monitoring_started = True
             input("Press Enter to continue")
 
         # Option 2: List current stats
-        elif meny_input == 2:
+        elif menu_input == 2:
             cpu, memory, disk = monitor.get_all_stats()
 
-             # Check if monitoring has been started
+            # Check if monitoring has been started
             if monitoring_started == False:
                 print("\n• No monitoring started •\n")
                 input("Press Enter to continue")
@@ -40,12 +39,12 @@ def main():
             display_stats(cpu, memory, disk)
             input("\nPress Enter to continue")
 
-         # Option 3: Configure alarms
-        elif meny_input == 3:
+        # Option 3: Configure alarms
+        elif menu_input == 3:
             alarm_menu_is_running = True
             while alarm_menu_is_running:
-                print_alarm_meny()
-                alarm_input = alarm_meny_choice()
+                print_alarm_menu()
+                alarm_input = alarm_menu_choice()
                 monitor.clear_screen()
 
                 # Create CPU alarm
@@ -66,18 +65,18 @@ def main():
                     disk_percentage = get_valid_percentage("Enter alarm limit (1-100): ")
                     monitor.add_alarm("disk", disk_percentage)
 
-                 # Return to main menu
+                # Return to main menu
                 elif alarm_input == 4:
                     alarm_menu_is_running = False
 
         # Option 4: Show all configured alarms
-        elif meny_input == 4:
+        elif menu_input == 4:
             monitor.show_alarms()
             input("\nPress Enter to continue")
 
         # Option 5: Start active monitoring mode
-        elif meny_input == 5:
-             # Check if monitoring has been started
+        elif menu_input == 5:
+            # Check if monitoring has been started
             if not monitoring_started:
                 print("\n• No monitoring started •\n")
                 input("Press Enter to continue")
@@ -90,7 +89,7 @@ def main():
                         cpu, memory, disk = monitor.get_all_stats()
                         monitor.clear_screen()
                     
-                         # Display current stats and check alarms
+                        # Display current stats and check alarms
                         display_stats(cpu, memory, disk)
                         monitor.check_alarms(cpu, memory.percent, disk.percent)
                         
@@ -105,10 +104,10 @@ def main():
                     input('\nPress Enter to continue')
             
         # Option 6: Exit program
-        elif meny_input == 6:
+        elif menu_input == 6:
             write_log("Program ended")
             print("\nExiting program..")
-            meny_is_running = False
+            menu_is_running = False
 
 if __name__ == "__main__":
     main()
