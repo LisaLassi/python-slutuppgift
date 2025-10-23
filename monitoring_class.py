@@ -15,58 +15,46 @@ class SystemMonitor:
         }
         self.load_alarms()
 
-    def load_alarms(self):
-        """Loads alarms from json file if it exists"""
-
-        if os.path.exists(self.alarms_file):
+    def load_alarms(self): # Loads alarms from json file if it exists
+        if os.path.exists(self.alarms_file): 
             try:
                 with open(self.alarms_file, 'r', encoding='utf-8') as f:
                     self.alarms = json.load(f)
                 write_log(f"Loaded {sum(len(v) for v in self.alarms.values())} alarms from file")
-            
-            except:
-                write_log("Error loading alarms, using empty alarm list")
 
-    def save_alarms(self):
-        """Saving alarms to json file"""
+            except Exception as e:
+                write_log(f"Error loading alarms: {e}, using empty alarm list") 
 
+    def save_alarms(self): # Saving alarms to json file
         os.makedirs(os.path.dirname(self.alarms_file), exist_ok=True)
-        with open(self.alarms_file, 'w', encoding='utf-8') as f:
+        with open(self.alarms_file, 'w', encoding='utf-8') as f: 
             json.dump(self.alarms, f, indent=4)
 
         write_log("Alarms saved to file")
 
-    def get_cpu(self):
-        """Get current CPU usage percentage."""
+    def get_cpu(self): # Get current CPU usage percentage
         return psutil.cpu_percent(interval=1)
 
-    def get_memory(self):
-        """Get current memory statistics."""
+    def get_memory(self): # Get current memory statistics
         return psutil.virtual_memory()
-    
-    def get_disk(self):
-        """Get current disk usage."""
-        if os.name == 'nt': #Windows
-            return psutil.disk_usage('C:\\')
-        else: #Linux/ Mac
-            return psutil.disk_usage('/')
-    
-    def get_all_stats(self):
-        """Get all system statistics at once."""
-        return self.get_cpu(), self.get_memory(), self.get_disk()
-    
-    def add_alarm(self, alarm_type, percentage):
-        """Add a new alarm threshold"""
 
+    def get_disk(self): # Get current disk usage statistics
+        if os.name == 'nt': # Windows
+            return psutil.disk_usage('C:\\')
+        else: # Linux/ Mac
+            return psutil.disk_usage('/')
+
+    def get_all_stats(self): # Get all system statistics at once
+        return self.get_cpu(), self.get_memory(), self.get_disk()
+
+    def add_alarm(self, alarm_type, percentage): # Add a new alarm threshold
         self.alarms[alarm_type].append(percentage)
         print(f"\n--- ✓ Alarm for {alarm_type} set to {percentage}% ---")
         write_log(f"Alarm created: [{alarm_type}] set to ({percentage}%)")
         self.save_alarms()
         return True # Alarm added successfully
-    
-    def show_alarms(self):
-        """Display all currently configured alarms."""
 
+    def show_alarms(self): # Display all currently configured alarms
         write_log("Listed alarms")
         
         if not any (self.alarms.values()):
@@ -83,10 +71,9 @@ class SystemMonitor:
                     for p in percentages:
                         print(f"- {alarm_type.upper()}: {p}%")
 
-    def check_alarms(self, cpu, memory, disk):
-        """Check if any alarm thresholds have been exceeded."""
-
+    def check_alarms(self, cpu, memory, disk): # Check if any alarm thresholds have been exceeded
         print("\n • Monitoring active • \n")
+
         for level in self.alarms["cpu"]:
             if cpu >= level:
                 print(f"*** WARNING! CPU-ALARM ACTIVATED! CPU usage exceeds {level}%, current at {cpu:.1f}%) ***")
@@ -101,7 +88,6 @@ class SystemMonitor:
             if disk >= level:
                 print(f"*** WARNING! DISK-ALARM ACTIVATED! DISK usage exceeds {level}%, current at {disk}% ***")
                 write_log(f"DISK alarm triggered: current at {disk}%, limit set to {level}%")
-    
-    def clear_screen(self):
-        """Clear the terminal screen (cross-platform)."""
+
+    def clear_screen(self): # Clear the terminal screen (cross-platform)
         os.system('cls' if os.name == 'nt' else 'clear')
