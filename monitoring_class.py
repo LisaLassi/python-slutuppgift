@@ -7,7 +7,7 @@ class SystemMonitor:
     """Class for monitoring system resources and managing alarms."""
         
     def __init__(self): 
-        self.alarms_file = os.path.join("system_logs", "alarms.json")
+        self.alarms_file = os.path.join("saved_alarms", "alarms.json")
         self.alarms = {
             "cpu": [],
             "memory": [],
@@ -62,7 +62,7 @@ class SystemMonitor:
         print(f"\n--- ✓ Alarm for {alarm_type} set to {percentage}% ---")
         write_log(f"Alarm created: [{alarm_type}] set to ({percentage}%)")
         self.save_alarms()
-        return True # Gör egentligen ingenting, då jag inte använder mig av något vilkor om detta är sant eller falskt. Men bra att ha för att veta att något lyckades och la till något.
+        return True # Alarm added successfully
     
     def show_alarms(self):
         """Display all currently configured alarms."""
@@ -87,19 +87,19 @@ class SystemMonitor:
         """Check if any alarm thresholds have been exceeded."""
 
         print("\n • Monitoring active • \n")
-        for level in self.alarms["cpu"]: # Går igenom alla cpu larmgränser
+        for level in self.alarms["cpu"]:
             if cpu >= level:
-                print(f"*** WARNING! CPU-ALARM ACTIVATED! cpu usage exceeds {level}%, current at {cpu:.1f}%) ***")
+                print(f"*** WARNING! CPU-ALARM ACTIVATED! CPU usage exceeds {level}%, current at {cpu:.1f}%) ***")
                 write_log(f"CPU alarm triggered: current at {cpu}%, limit set to {level}%") 
 
         for level in self.alarms["memory"]:
             if memory >= level:
-                print(f"*** WARNING! MEMORY-ALARM ACTIVATED! memory usage exceeds {level}%, current at {memory}% ***")
+                print(f"*** WARNING! MEMORY-ALARM ACTIVATED! MEMORY usage exceeds {level}%, current at {memory}% ***")
                 write_log(f"MEMORY alarm triggered: current at {memory}%, limit set to {level}%")
 
         for level in self.alarms["disk"]:
             if disk >= level:
-                print(f"*** WARNING! DISK-ALARM ACTIVATED! disk usage exceeds {level}%, current at {disk}% ***")
+                print(f"*** WARNING! DISK-ALARM ACTIVATED! DISK usage exceeds {level}%, current at {disk}% ***")
                 write_log(f"DISK alarm triggered: current at {disk}%, limit set to {level}%")
     
     def clear_screen(self):
