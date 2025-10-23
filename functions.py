@@ -13,7 +13,7 @@ def write_log(message):
     with open(log_file, "a", encoding="utf-8") as f:
         f.write(f"{timestamp} | {message}\n")
 
-def print_main_meny():
+def print_main_menu():
     """Display the main menu options."""
 
     print("------------ System monitoring ------------\n")
@@ -25,7 +25,7 @@ def print_main_meny():
     print ("[6] Quit program\n")
     print("---------------------------------------------------")
 
-def print_alarm_meny():
+def print_alarm_menu():
     """Display the alarm configuration menu."""
 
     print("\n• Configure alarm •\n")
@@ -34,24 +34,24 @@ def print_alarm_meny():
     print("[3] Disk usage")
     print("[4] Back to main menu")
 
-def main_meny_choice():
+def main_menu_choice():
     """Get a valid main menu choice from the user."""
 
     while True:
-        meny_input = input("\nMake a menu choice 1-6: ")
+        menu_input = input("\nMake a menu choice 1-6: ")
         try:
-            meny_number = int(meny_input)
-            if 1 <= meny_number <= 6:
-                return meny_number
+            menu_number = int(menu_input)
+            if 1 <= menu_number <= 6:
+                return menu_number
             else:
                 print("\nInvalid choice. Must be a number between 1-6. Try again.")
 
         except ValueError:
             print("\nInvalid choice. Must be a number between 1-6. Try again.")
 
-def alarm_meny_choice():
+def alarm_menu_choice():
     """Get a valid alarm menu choice from the user."""
-    
+
     while True:
         alarm_input = input("\nMake a menu choice 1-4: ")
         try:
@@ -85,9 +85,10 @@ def bytes_to_gb(bytes_value):
     
 def get_valid_percentage(prompt):
      """Get a valid percentage value (0-100) from user input."""
+
      while True:
           percentage = input(prompt)
-           # Check if input is a digit and within valid range
+          # Check if input is a digit and within valid range
           if percentage.isdigit() and int(percentage) >= 0 and int(percentage) <=100:
                return int(percentage) 
           else:
