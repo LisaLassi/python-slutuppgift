@@ -72,11 +72,10 @@ def display_stats(cpu, memory, disk): # Display system statistics in a formatted
 def bytes_to_gb(bytes_value): # Convert bytes to gigabytes
     return bytes_value / (1024**3)
     
-def get_valid_percentage(prompt): # Get a valid percentage value (0-100) from user input.
-     while True:
-          percentage = input(prompt)
-          # Check if input is a digit and within valid range
-          if percentage.isdigit() and int(percentage) >= 0 and int(percentage) <=100:
-               return int(percentage) 
-          else:
+def get_valid_percentage(prompt): # Get a valid percentage value (0-100) from user input
+    while True:
+        percentage = input(prompt)
+        if percentage.isdigit() and 0 <= int(percentage) <= 100:
+            return int(percentage)
+        else:
                print("\nInvalid choice. Must be a number between 0-100. Try again.\n")
