@@ -6,7 +6,7 @@ from functions import alarm_menu_choice, get_valid_percentage, display_stats
 def main():
     """Main program loop for system monitoring application."""
 
-    monitor = SystemMonitor() # Creating an instance of SystemMonitor class
+    monitor = SystemMonitor()
 
     menu_is_running = True 
     monitoring_started = False 
