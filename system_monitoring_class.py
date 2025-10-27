@@ -95,8 +95,9 @@ class SystemMonitor:
     def delete_specific_alarm(self, alarm_type, percentage): # Delete a specific alarm threshold
         if percentage in self.alarms[alarm_type]:
             self.alarms[alarm_type].remove(percentage)
-            write_log(f"Deleted alarm: [{alarm_type}] set to ({percentage}%)")
+            write_log(f"Deleted alarm: [{alarm_type}] with threshold: ({percentage})%")
             self.save_alarms()
             return True # Alarm deleted successfully
+        
         else:
             return False # Alarm not found
