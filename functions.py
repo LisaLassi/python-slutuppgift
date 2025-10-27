@@ -18,8 +18,9 @@ def print_main_menu(): # Display the main menu options
     print ("[2] List active monitoring")
     print ("[3] Create alarm for cpu/ memory/ disk")
     print ("[4] Show alarms")
-    print ("[5] Start monitoring mode")
-    print ("[6] Quit program\n")
+    print ("[5] Delete an alarm")
+    print ("[6] Start monitoring mode")
+    print ("[7] Quit program\n")
     print("---------------------------------------------------")
 
 def print_alarm_menu(): # Display the alarm configuration menu
@@ -31,16 +32,16 @@ def print_alarm_menu(): # Display the alarm configuration menu
 
 def main_menu_choice(): # Get a valid main menu choice from the user
     while True:
-        menu_input = input("\nMake a menu choice 1-6: ")
+        menu_input = input("\nMake a menu choice 1-7: ")
         try:
             menu_number = int(menu_input)
-            if 1 <= menu_number <= 6:
+            if 1 <= menu_number <= 7:
                 return menu_number
             else:
-                print("\nInvalid choice. Must be a number between 1-6. Try again.")
+                print("\nInvalid choice. Must be a number between 1-7. Try again.")
 
         except ValueError:
-            print("\nInvalid choice. Must be a number between 1-6. Try again.")
+            print("\nInvalid choice. Must be a number between 1-7. Try again.")
 
 def alarm_menu_choice(): # Get a valid alarm menu choice from the user
     while True:
