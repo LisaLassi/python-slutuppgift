@@ -74,8 +74,48 @@ def main():
             monitor.show_alarms()
             input("\nPress Enter to continue")
 
-        # Option 5: Start active monitoring mode
+        # Option 5: Delete an alarm
         elif menu_input == 5:
+            delete_alarm_menu_is_running = True
+            while delete_alarm_menu_is_running:
+                print("\n----- Delete an alarm -----\n")
+                monitor.show_alarms()
+
+                print("\nSelect alarm-type to delete:")
+                print("[1] CPU-usage")
+                print("[2] Memory usage")
+                print("[3] Disk usage")
+                print("[4] Back to main menu")
+
+                alarm_type_input = alarm_menu_choice()
+
+                if alarm_type_input == 1:
+                    alarm_type = "cpu"
+
+                elif alarm_type_input == 2:
+                    alarm_type = "memory"
+
+                elif alarm_type_input == 3:
+                    alarm_type = "disk"
+
+                elif alarm_type_input == 4:
+                    delete_alarm_menu_is_running = False
+                    break # To skip rest of loop, or else it will ask for percentage to delete
+
+                if alarm_type: # If a valid alarm-type was selected
+                    percentage_to_delete = get_valid_percentage(f"\nEnter the alarm limit to delete for {alarm_type.upper()} (1-100): ")
+                    if monitor.delete_specific_alarm(alarm_type, percentage_to_delete):
+                        print(f"\n--- ✓ Alarm for {alarm_type} at {percentage_to_delete}% deleted ---\n")
+                    else:
+                        print(f"\n--- ✗ No alarm found for {alarm_type} at {percentage_to_delete}% ---")
+                    input("Press Enter to continue")
+
+                else:
+                    print("\nInvalid alarm type selected.")
+                    input("Press Enter to continue")
+
+        # Option 6: Start active monitoring mode
+        elif menu_input == 6:
             # Check if monitoring has been started
             if not monitoring_started:
                 print("\n• No monitoring started •\n")
@@ -103,8 +143,8 @@ def main():
                     print("\n\n• Monitoring ended succesfully •")
                     input('\nPress Enter to continue')
             
-        # Option 6: Exit program
-        elif menu_input == 6:
+        # Option 7: Exit program
+        elif menu_input == 7:
             write_log("Program ended")
             print("\nExiting program..")
             menu_is_running = False
