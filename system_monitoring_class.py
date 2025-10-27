@@ -49,8 +49,8 @@ class SystemMonitor:
 
     def add_alarm(self, alarm_type, percentage): # Add a new alarm threshold
         self.alarms[alarm_type].append(percentage)
-        print(f"\n--- ✓ Alarm for {alarm_type} set to {percentage}% ---")
-        write_log(f"Alarm created: [{alarm_type}] set to ({percentage}%)")
+        print(f"\n--- ✓ Alarm for {alarm_type.upper()} set to {percentage}% ---")
+        write_log(f"Alarm created: [{alarm_type.upper()}] set to ({percentage}%)")
         self.save_alarms()
         return True # Alarm added successfully
 
@@ -95,7 +95,7 @@ class SystemMonitor:
     def delete_specific_alarm(self, alarm_type, percentage): # Delete a specific alarm threshold
         if percentage in self.alarms[alarm_type]:
             self.alarms[alarm_type].remove(percentage)
-            write_log(f"Deleted alarm: [{alarm_type}] with threshold: ({percentage})%")
+            write_log(f"Deleted alarm: [{alarm_type.upper()}] with threshold: ({percentage})%")
             self.save_alarms()
             return True # Alarm deleted successfully
         
