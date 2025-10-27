@@ -78,7 +78,7 @@ def main():
         elif menu_input == 5:
             delete_alarm_menu_is_running = True
             while delete_alarm_menu_is_running:
-                print("\n----- Delete an alarm -----\n")
+                print("----- Delete an alarm -----")
                 monitor.show_alarms()
 
                 print("\nSelect alarm-type to delete:")
