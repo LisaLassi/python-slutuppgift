@@ -105,9 +105,9 @@ def main():
                 if alarm_type: # If a valid alarm-type was selected
                     percentage_to_delete = get_valid_percentage(f"\nEnter the alarm limit to delete for {alarm_type.upper()} (1-100): ")
                     if monitor.delete_specific_alarm(alarm_type, percentage_to_delete):
-                        print(f"\n--- ✓ Alarm for {alarm_type} at {percentage_to_delete}% deleted ---\n")
+                        print(f"\n--- ✓ Alarm for {alarm_type.upper()} at {percentage_to_delete}% deleted ---\n")
                     else:
-                        print(f"\n--- ✗ No alarm found for {alarm_type} at {percentage_to_delete}% ---")
+                        print(f"\n--- ✗ No alarm found for {alarm_type.upper()} at {percentage_to_delete}% ---\n")
                     input("Press Enter to continue")
 
                 else:
